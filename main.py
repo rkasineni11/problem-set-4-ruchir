@@ -16,39 +16,32 @@ def main():
     directories = ['data/part2_plots', 'data/part3_plots', 'data/part4_plots', 'data/part5_plots']
     part1.create_directories(directories)
     
-    pred_universe, arrest_events, charge_counts, charge_counts_by_offense = part1.extract_transform()
+    pred_universe, arrest_events, charge_counts, charge_counts_by_offense, merged_df = part1.extract_transform()
     
-    ##  PART 2: PLOT EXAMPLES  ##
-    # Apply plot theme
-    part2.seaborn_settings()
+    # Debugging: Check if 'has_felony_charge' exists in merged_df
+    print(merged_df.columns)  # Add this line to check columns in merged_df
 
-    # Generate plots
+    ##  PART 2: PLOT EXAMPLES  ##
+    part2.seaborn_settings()
     part2.barplots(charge_counts, charge_counts_by_offense)
     part2.cat_plots(charge_counts, pred_universe)
     part2.histograms(pred_universe)
     part2.scatterplot(pred_universe)
 
     ##  PART 3: BAR PLOTS AND HISTOGRAMS  ##
-    # 1
-
-    # 2
-
-    # 3
-
-    # 4
+    part3.barplot_for_fta(pred_universe)
+    part3.barplot_fta_hue_by_sex(pred_universe)
+    part3.histogram_age_at_arrest(pred_universe)
+    part3.histogram_binned(pred_universe)
 
     ##  PART 4: CATEGORICAL PLOTS  ##
-    # 1
-    
-    # 2
-
-    # 3
+    part4.catplot_felony_prediction(merged_df)  # Ensure this function receives merged_df
+    part4.catplot_nonfelony_prediction(merged_df)
+    part4.catplot_felony_prediction_with_actual(merged_df)
 
     ##  PART 5: SCATTERPLOTS  ##
-    # 1
-    
-    # 2
-
+    part5.scatterplot_felony_vs_nonfelony(merged_df)
+    part5.scatterplot_felony_prediction_vs_actual(merged_df)
 
 if __name__ == "__main__":
     main()
